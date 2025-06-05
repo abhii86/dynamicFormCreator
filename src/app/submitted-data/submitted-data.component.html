@@ -1,0 +1,22 @@
+<div class="submitted-data">
+  <h2>Submitted Data for: {{ formName }}</h2>
+
+  <div *ngIf="submissions.length === 0">
+    <p>No submissions found for this form.</p>
+  </div>
+
+  <div *ngFor="let submission of submissions; let si = index" class="submission-card">
+    <h4>Submission #{{ si + 1 }} - {{ submission.submittedAt | date:'medium' }}</h4>
+    <ul>
+      <li *ngFor="let field of fields; let fi = index">
+        <strong>{{ field.label }}:</strong>
+        <span *ngIf="field.type === 'Checkbox'">
+          {{ submission.data['field_' + fi]?.join(', ') || 'N/A' }}
+        </span>
+        <span *ngIf="field.type !== 'Checkbox'">
+          {{ submission.data['field_' + fi] || 'N/A' }}
+        </span>
+      </li>
+    </ul>
+  </div>
+</div>

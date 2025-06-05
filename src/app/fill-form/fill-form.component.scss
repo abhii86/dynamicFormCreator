@@ -1,0 +1,58 @@
+.fill-form {
+  padding: 20px;
+  max-width: 600px;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  .form-field {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      font-weight: bold;
+    }
+
+    small {
+      color: #777;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 6px;
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+    }
+  }
+
+  .success-message {
+    margin-top: 20px;
+    color: green;
+    font-weight: bold;
+  }
+}
+
+.login-container,
+.form-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.login-card {
+  width: 400px;
+  padding: 20px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}

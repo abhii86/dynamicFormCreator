@@ -1,0 +1,79 @@
+.form-builder {
+  padding: 20px;
+
+  .field-types {
+    margin: 20px 0;
+
+    button {
+      margin-right: 10px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .field-list {
+    border: 1px dashed #ccc;
+    padding: 10px;
+    margin-bottom: 20px;
+    min-height: 150px;
+  }
+
+  .field-item {
+    display: flex;
+    justify-content: space-between;
+    background: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    align-items: center;
+  }
+
+  .edit-panel {
+    border: 1px solid #ddd;
+    padding: 20px;
+    background: #fff8e1;
+    margin-bottom: 20px;
+  }
+}
+.form-builder-container {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.form-builder-card {
+  width: 100%;
+  max-width: 800px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.palette-section {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.field-item {
+  margin-bottom: 1rem;
+  cursor: move;
+}
+
+.field-config {
+  padding: 1rem 0;
+}
+
+.delete-icon {
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.button-row {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}

@@ -1,0 +1,29 @@
+<div class="form-list">
+  <h2>Form Templates</h2>
+
+  <button mat-raised-button color="primary" (click)="navigateToBuilder()">+ Create New Form</button>
+
+  <mat-list *ngIf="formTemplates.length > 0; else noForms">
+    <mat-list-item *ngFor="let form of formTemplates">
+      <div class="form-info">
+        <h3>{{ form.name }}</h3>
+        <p>Fields: {{ form.fields.length }}</p>
+      </div>
+      <div class="actions">
+        <button mat-icon-button (click)="editForm(form.id)" matTooltip="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="previewForm(form.id)" matTooltip="Preview">
+          <mat-icon>visibility</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="deleteForm(form.id)" matTooltip="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </mat-list-item>
+  </mat-list>
+
+  <ng-template #noForms>
+    <p>No forms found. Click "Create New Form" to get started.</p>
+  </ng-template>
+</div>

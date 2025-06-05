@@ -1,0 +1,104 @@
+<!-- <div class="fill-form" *ngIf="formTemplate">
+  <h2>{{ formTemplate.name }}</h2>
+
+  <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+    <div *ngFor="let field of formTemplate.fields; let i = index" class="form-field">
+      <label>{{ field.label }} <span *ngIf="field.required">*</span></label>
+      <small *ngIf="field.helpText">{{ field.helpText }}</small>
+
+      <ng-container [ngSwitch]="field.type">
+        <input *ngSwitchCase="'Text'" type="text" [formControlName]="'field_' + i" />
+        <textarea *ngSwitchCase="'Textarea'" [formControlName]="'field_' + i"></textarea>
+
+        <select *ngSwitchCase="'Dropdown'" [formControlName]="'field_' + i">
+          <option *ngFor="let opt of field.options" [value]="opt">{{ opt }}</option>
+        </select>
+
+        <div *ngSwitchCase="'Checkbox'">
+          <label *ngFor="let opt of field.options">
+            <input type="checkbox" [value]="opt" (change)="onCheckboxChange($event, i)" /> {{ opt }}
+          </label>
+        </div>
+
+        <div *ngSwitchCase="'Radio'">
+          <label *ngFor="let opt of field.options">
+            <input type="radio" [value]="opt" [formControlName]="'field_' + i" /> {{ opt }}
+          </label>
+        </div>
+        <input *ngSwitchCase="'Date'" type="date" [formControlName]="'field_' + i" />
+      </ng-container>
+
+      <div class="error" *ngIf="formGroup.get('field_' + i)?.invalid && formGroup.get('field_' + i)?.touched">
+        Field is invalid or required
+      </div>
+    </div>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+
+  <div *ngIf="isSubmitted" class="success-message">
+    <p>Form submitted successfully!</p>
+  </div>
+</div> -->
+
+<div class="form-container" *ngIf="formGroup">
+  <mat-card>
+    <mat-card-title>{{ formTemplate?.name || 'Fill Form' }}</mat-card-title>
+    <form [formGroup]="formGroup" (ngSubmit)="submitForm()">
+      <div *ngFor="let field of formTemplate?.fields">
+        <ng-container [ngSwitch]="field.type">
+          <!-- Text Input -->
+          <mat-form-field appearance="fill" *ngSwitchCase="'text'" class="full-width">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [formControlName]="field.name" [required]="field.required" />
+            <mat-hint>{{ field.helpText }}</mat-hint>
+          </mat-form-field>
+
+          <!-- Textarea -->
+          <mat-form-field appearance="fill" *ngSwitchCase="'textarea'" class="full-width">
+            <mat-label>{{ field.label }}</mat-label>
+            <textarea matInput [formControlName]="field.name" [required]="field.required"></textarea>
+            <mat-hint>{{ field.helpText }}</mat-hint>
+          </mat-form-field>
+
+          <!-- Dropdown -->
+          <mat-form-field appearance="fill" *ngSwitchCase="'dropdown'" class="full-width">
+            <mat-label>{{ field.label }}</mat-label>
+            <mat-select [formControlName]="field.name">
+              <mat-option *ngFor="let option of field.options" [value]="option">{{ option }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Checkbox Group -->
+          <div *ngSwitchCase="'checkbox'">
+            <label>{{ field.label }}</label>
+            <mat-checkbox
+              *ngFor="let option of field.options"
+              [formControlName]="option"
+              >{{ option }}</mat-checkbox
+            >
+          </div>
+
+          <!-- Radio Group -->
+          <div *ngSwitchCase="'radio'">
+            <label>{{ field.label }}</label>
+            <mat-radio-group [formControlName]="field.name">
+              <mat-radio-button *ngFor="let option of field.options" [value]="option">
+                {{ option }}
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+
+          <!-- Date Picker -->
+          <mat-form-field appearance="fill" *ngSwitchCase="'date'" class="full-width">
+            <mat-label>{{ field.label }}</mat-label>
+            <input matInput [matDatepicker]="picker" [formControlName]="field.name" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </ng-container>
+      </div>
+
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </form>
+  </mat-card>
+</div>

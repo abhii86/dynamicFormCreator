@@ -1,0 +1,76 @@
+<div class="form-builder">
+  <h2>{{ formId ? 'Edit' : 'Create' }} Form</h2>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Form Name</mat-label>
+    <input matInput formControlName="name" [formGroup]="formMeta">
+  </mat-form-field>
+
+  <div class="field-types">
+    <h3>Add Fields</h3>
+    <button mat-raised-button *ngFor="let field of availableFields" (click)="addField(field)">
+      {{ field }}
+    </button>
+  </div>
+
+  <div class="field-list" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="field-item" *ngFor="let field of formFields; index as i" cdkDrag>
+      <div class="field-summary">
+        <strong>{{ field.label }}</strong> ({{ field.type }})
+      </div>
+      <div class="actions">
+        <button mat-icon-button (click)="editField(i)" matTooltip="Edit">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteField(i)" color="warn" matTooltip="Delete">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <ng-container *ngIf="editingField">
+    <div class="edit-panel">
+      <h3>Edit Field</h3>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Label</mat-label>
+        <input matInput [(ngModel)]="editingField.label">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Help Text</mat-label>
+        <input matInput [(ngModel)]="editingField.helpText">
+      </mat-form-field>
+
+      <mat-checkbox [(ngModel)]="editingField.required">Required</mat-checkbox>
+
+      <ng-container *ngIf="editingField.type === 'Dropdown' || editingField.type === 'Checkbox' || editingField.type === 'Radio'">
+        <mat-label>Options</mat-label>
+        <div *ngFor="let opt of editingField.options; let j = index">
+          <input [(ngModel)]="editingField.options[j]" />
+        </div>
+        <button mat-button (click)="editingField.options.push('New Option')">+ Add Option</button>
+      </ng-container>
+
+      <!-- Basic validation rules -->
+      <mat-form-field appearance="fill">
+        <mat-label>Min Length</mat-label>
+        <input matInput type="number" [(ngModel)]="editingField.validations.minLength">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Max Length</mat-label>
+        <input matInput type="number" [(ngModel)]="editingField.validations.maxLength">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Pattern</mat-label>
+        <input matInput [(ngModel)]="editingField.validations.pattern">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="saveField()">Save Field</button>
+    </div>
+  </ng-container>
+
+  <button mat-raised-button color="accent" (click)="saveForm()">Save Form</button>
+</div>

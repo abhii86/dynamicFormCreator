@@ -1,0 +1,25 @@
+.form-list {
+  padding: 20px;
+
+  h2 {
+    margin-bottom: 16px;
+  }
+
+  .form-info {
+    flex: 1;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  mat-list-item {
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin: 8px 0;
+    padding: 12px;
+    align-items: center;
+    height: 90px;
+  }
+}
