@@ -1,0 +1,45 @@
+<form [formGroup]="displayForm" (ngSubmit)="onSubmit()">
+  <div *ngFor="let eachIteration of displayForm?.controls | keyvalue">
+    <ng-container [ngSwitch]="newFormDefinition[eachIteration.key]?.type">
+      <!-- Text Input -->
+      <div *ngSwitchCase="'Text'">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ newFormDefinition[eachIteration.key].label }}</mat-label>
+          <input type="text" [formControlName]="eachIteration.key" matInput />
+        </mat-form-field>
+      </div>
+
+      <!-- Text/Area Input -->
+      <div *ngSwitchCase="'Textarea'">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ newFormDefinition[eachIteration.key].label }}</mat-label>
+          <input type="text" [formControlName]="eachIteration.key" matInput />
+        </mat-form-field>
+      </div>
+
+      <div *ngSwitchCase="'number'">
+        <label>{{ newFormDefinition[eachIteration.key].label }}</label>
+        <input type="number" [formControlName]="eachIteration.key" />
+      </div>
+
+      <!-- Dropdown -->
+      <div *ngSwitchCase="'Dropdown'">
+        <mat-form-field appearance="fill">
+          <mat-label>{{ newFormDefinition[eachIteration.key].label }}</mat-label>
+          <mat-select [formControlName]="eachIteration.key">
+            <mat-option *ngFor="let opt of newFormDefinition[eachIteration.key].options" [value]="opt">
+              {{ opt }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </ng-container>
+
+    <div *ngIf="displayForm.controls[eachIteration.key].invalid && displayForm.controls[eachIteration.key].touched">
+      <small style="color:red">This field is required.</small>
+    </div>
+    <br />
+  </div>
+
+  <button type="button" mat-raised-button color="accent" (click)="navigateTo()">Close</button>
+</form>
