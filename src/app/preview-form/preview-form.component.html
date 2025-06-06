@@ -17,9 +17,20 @@
         </mat-form-field>
       </div>
 
-      <div *ngSwitchCase="'number'">
+      <!-- Checkbox -->
+      <div *ngSwitchCase="'Checkbox'">
+        <mat-label>{{ newFormDefinition[eachIteration.key].label }}</mat-label>
+        <mat-checkbox type="checkbox" [formControlName]="eachIteration.key"></mat-checkbox>
+      </div>
+      <!-- Date -->
+      <div *ngSwitchCase="'Date'">
         <label>{{ newFormDefinition[eachIteration.key].label }}</label>
-        <input type="number" [formControlName]="eachIteration.key" />
+        <input type="date" [formControlName]="eachIteration.key" />
+      </div>
+      <!-- Radio -->
+      <div *ngSwitchCase="'Radio'">
+        <label>{{ newFormDefinition[eachIteration.key].label }}</label>
+        <input type="radio" [formControlName]="eachIteration.key" />
       </div>
 
       <!-- Dropdown -->

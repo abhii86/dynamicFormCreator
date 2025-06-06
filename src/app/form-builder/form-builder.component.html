@@ -47,7 +47,7 @@
 
       <mat-checkbox [(ngModel)]="editingField.required">Required</mat-checkbox>
 
-      <ng-container *ngIf="editingField.type === 'Dropdown' || editingField.type === 'Checkbox' || editingField.type === 'Radio'">
+      <ng-container *ngIf="editingField.type === 'Dropdown'">
         <mat-label>Options</mat-label>
         <div *ngFor="let opt of editingField.options; let j = index">
           <input [(ngModel)]="editingField.options[j]" />
@@ -56,19 +56,21 @@
       </ng-container>
 
       <!-- Basic validation rules -->
-      <mat-form-field appearance="fill">
-        <mat-label>Min Length</mat-label>
-        <input matInput type="number" [(ngModel)]="editingField.validations.minLength">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Max Length</mat-label>
-        <input matInput type="number" [(ngModel)]="editingField.validations.maxLength">
-      </mat-form-field>
+      <ng-container *ngIf="editingField.type === 'Text' || editingField.type === 'Textarea'">
+        <mat-form-field appearance="fill">
+          <mat-label>Min Length</mat-label>
+          <input matInput type="number" [(ngModel)]="editingField.validations.minLength">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Max Length</mat-label>
+          <input matInput type="number" [(ngModel)]="editingField.validations.maxLength">
+        </mat-form-field>
 
-      <mat-form-field appearance="fill">
-        <mat-label>Pattern</mat-label>
-        <input matInput [(ngModel)]="editingField.validations.pattern">
-      </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Pattern</mat-label>
+          <input matInput [(ngModel)]="editingField.validations.pattern">
+        </mat-form-field>
+      </ng-container>
 
       <button mat-raised-button color="primary" (click)="saveField()">Save Field</button>
     </div>

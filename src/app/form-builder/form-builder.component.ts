@@ -86,6 +86,7 @@ export class FormBuilderComponent implements OnInit {
 
   deleteField(index: number) {
     this.formFields.splice(index, 1);
+    this.editingField = null;
   }
 
   saveForm() {
