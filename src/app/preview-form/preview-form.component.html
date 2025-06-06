@@ -13,7 +13,7 @@
       <div *ngSwitchCase="'Textarea'">
         <mat-form-field appearance="fill">
           <mat-label>{{ newFormDefinition[eachIteration.key].label }}</mat-label>
-          <input type="text" [formControlName]="eachIteration.key" matInput />
+          <textarea type="textarea" [formControlName]="eachIteration.key" matInput></textarea>
         </mat-form-field>
       </div>
 
